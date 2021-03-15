@@ -1,40 +1,40 @@
 def shiftchar(letter, n):
-    if ord(letter) > 64 and ord(letter) < 91:
-        if n > 0:
-            if (ord(letter) + n) >= 91:
-                return chr(ord(letter) - (26 - n))
+    result = ""
+    if n >= 26:
+        n = n % 26
+    if ord(letter) > 96 and ord(letter) < 123:
+        if n > 0: 
+            if (ord(letter) + n) > 123:
+                result =  chr(ord(letter) - (26 - (n-1)))
+            elif (ord(letter) + n) == 123:
+                result = chr(32)
             else:
-                return chr(ord(letter) + n)
+                result = chr(ord(letter) + n)
         elif n < 0:
-            if (ord(letter) + n) <= 64:
-                return chr(ord(letter) + (26 + n))
+            if (ord(letter) + n) < 96:
+                result = chr(ord(letter) + (26 + (n+1)))
+            elif (ord(letter) + n) == 96:
+                result = chr(32)
             else:
-                return chr(ord(letter) + n)
+                result = chr(ord(letter) + n)
         else:
-            return letter
-    elif ord(letter) > 96 and ord(letter) < 123:
+            result = letter
+    elif ord(letter) == 32:
         if n > 0:
-            if (ord(letter) + n) >= 123:
-                return chr(ord(letter) - (26 - n))
-            else:
-                return chr(ord(letter) + n)
+            result = chr(96 + n)
         elif n < 0:
-            if (ord(letter) + n) <= 96:
-                return chr(ord(letter) + (26 + n))
-            else:
-                return chr(ord(letter) + n)
-        else:
-            return letter
+            result = chr(123 + n)
     else:
-        return letter
+        result = letter
+    return result
 
 
 def letterdistance(letter):
     l = ord(letter)
     n = 0
-    while l != 97:
-        n += 1
-        l -= 1
+    n = l - ord("a")
 
     return n
 
+
+# print(letterdistance("c"))
