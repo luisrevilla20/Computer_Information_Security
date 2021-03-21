@@ -48,11 +48,12 @@ name_message=b'luisorevillayjesusgonzaleza!!!!!' #32 bits
 
 #Step 10 Combine key_iv with name_message and hash it
 digest=hashlib.sha256()
-digest.update(b"".join([cipherkey_iv, name_message]))
+digest.update(b"".join([key, name_message]))
 r=digest.digest()
 
 #Step 11 Combine the name with the hash
-aes_encrypt=aes_encryptInstance.encrypt(r)
+name_hash=b"".join([name_message, r])
+aes_encrypt=aes_encryptInstance.encrypt(name_hash)
 s.send(aes_encrypt)
 
 data3= s.recv(1024)
