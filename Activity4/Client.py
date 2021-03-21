@@ -56,6 +56,7 @@ name_hash=b"".join([name_message, r])
 aes_encrypt=aes_encryptInstance.encrypt(name_hash)
 s.send(aes_encrypt)
 
+#Step 12 Receive validation message
 data3= s.recv(1024)
 aes_decrypt=aes_decryptInstance.decrypt(data3)
 print(aes_decrypt.decode("ascii"))
